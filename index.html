@@ -94,6 +94,7 @@
 							<li class="fragment">Java...</li>
 						</ul>
 					</section>
+
 					<section>
 						<h2>Writing c extension I</h2>
 						<br>
@@ -139,18 +140,64 @@
 					</section>
 
 					<section>
-						<h2>Basement Level 2</h2>
-						<p>Cornify</p>
-						<a class="test" href="http://cornify.com">
-							<img width="280" height="326" src="https://s3.amazonaws.com/hakim-static/reveal-js/cornify.gif" alt="Unicorn">
-						</a>
+						<h2>Enough of theory. Coding time!</h2>
+						<img src="./images/theory.jpg" />
 					</section>
 					<section>
-						<h2>Basement Level 3</h2>
-						<p>That's it, time to go back up.</p>
-						<a href="#/2" class="image">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Up arrow" style="-webkit-transform: rotate(180deg);">
-						</a>
+						<h2>How it looks in ruby</h2>
+						<pre><code class="ruby">
+							class MyTest
+							  def initialize
+							    @arr = Array.new
+							  end
+
+							  def add(obj)
+							    @arr.push(obj)
+							  end
+							end
+						</code></pre>
+					</section>
+
+					<section>
+						<h2>How it looks in c</h2>
+						<pre><code class="c">
+							#include "ruby.h"
+
+							static ID id_push;
+
+							static VALUE t_init(VALUE self)
+							{
+							  VALUE arr;
+
+							  arr = rb_ary_new();
+							  rb_iv_set(self, "@arr", arr);
+							  return self;
+							}
+
+							static VALUE t_add(VALUE self, VALUE obj)
+							{
+							  VALUE arr;
+
+							  arr = rb_iv_get(self, "@arr");
+							  rb_funcall(arr, id_push, 1, obj);
+							  return arr;
+							}
+
+							VALUE cTest;
+
+							void Init_my_test() {
+							  cTest = rb_define_class("MyTest", rb_cObject);
+							  rb_define_method(cTest, "initialize", t_init, 0);
+							  rb_define_method(cTest, "add", t_add, 1);
+							  id_push = rb_intern("push");
+							}
+						</code></pre>
+					</section>
+
+					<section>
+						<h2>What's happening here?</h2>
+						Every extension defines a C global function named <i>Init_<b>name</b></i>.
+						This function will be called when the interpreter first loads the extension <i><b>name</b></i>
 					</section>
 				</section>
 
