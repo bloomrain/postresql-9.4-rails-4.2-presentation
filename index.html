@@ -4,10 +4,10 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>reveal.js - The HTML Presentation Framework</title>
+		<title>Ruby native extensions</title>
 
 		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-		<meta name="author" content="Hakim El Hattab">
+		<meta name="author" content="Povilas Jurčys">
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -44,21 +44,23 @@
 			<div class="slides">
 				<section>
 					<h1>Ruby</h1>
-					<h3>Getting dirty</h3>
+					<h3>native extensions</h3>
 					<p>
 						<small>Created by <a href="http://d9.lt">Povilas Jurčys</a> / <a href="http://twitter.com/PovilasJurcys">@PovilasJurcys</a></small>
 					</p>
 				</section>
 
+				<!-- intro -->
 				<section>
 					<section>
-						<h2>Ruby is fast!..</h2>
-						<h4 class="fragment">Fast as... grandpa</h4>
+						<h2>Ruby is fast!</h2>
+						<h4 class="fragment">...as grandpa</span></h4>
 						<img class="fragment" src="./images/grandpa_run.jpg" />
 					</section>
 
 					<section>
 						<h2>Ruby uses memory no more then it needs..</h2>
+						<h4 class="fragment">...as hungry hamster</h4>
 						<img src="./images/hamster.jpg" class="fragment" />
 					</section>
 
@@ -73,42 +75,69 @@
 					</section>
 
 					<section>
-						<h2>Lets talk numbers</h2>
-						<img src="./images/ruby_vs_c.png"  />
-					</section>
-				</section>
-
-				<section>
-					<section>
-						<h2>Drop ruby now! Start coding in c!</h2>
-						<h3 class="fragment">... or ...</h3>
-						<h3 class="fragment">STOP using wrong tools</h3>
+						<h4>Ruby is dynamic.</h4>
+						<h4 class="fragment">Ruby is beautiful.</h4>
+						<h4 class="fragment">Ruby is easy to understand</h4>
+						<h3 class="fragment">but stop using wrong tools for wrong jobs!</h3>
 						<img class="fragment" src="./images/wrong_tool.jpg" />
 					</section>
-
-					<section>
-						<h2>Lets start again: writing extensions in ruby</h2>
-						
-					</section>
 				</section>
-
 
 				<!-- Example of nested vertical slides -->
 				<section>
 					<section>
-						<h2>Vertical Slides</h2>
-						<p>
-							Slides can be nested inside of other slides,
-							try pressing <a href="#" class="navigate-down">down</a>.
-						</p>
-						<a href="#" class="image navigate-down">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
+						<h2>Ruby native extensions</h2>
+						<ul>
+							<li class="fragment">C</li>
+							<li class="fragment">C++</li>
+							<li class="fragment">D</li>
+							<li class="fragment">Java...</li>
+						</ul>
 					</section>
 					<section>
-						<h2>Basement Level 1</h2>
-						<p>Press down or up to navigate.</p>
+						<h2>Writing c extension I</h2>
+						<br>
+						<ul>
+							<ol>gem install rake-compiler<br>&nbsp;</ol>
+							<ol>
+								structure you code:<br>
+								<span style="color: gray">
+									|-- ext<br>
+									| &nbsp; &nbsp; `-- hello_world<br>
+									| &nbsp; &nbsp; &nbsp; |-- extconf.rb<br>
+									| &nbsp; &nbsp; &nbsp; `-- hello_world.c<br>
+									|-- lib<br>
+									`-- Rakefile<br>
+								</span>
+							</ol>
+						</ul>
 					</section>
+
+					<section>
+						<h2>Writing c extension II</h2>
+						<pre><code class="ruby">
+							# ext/extconf.rb
+							require 'mkmf'
+
+							extension_name = 'hello_world'
+							dir_config(extension_name)
+							create_makefile(extension_name)
+						</code></pre>
+
+						<pre><code class="ruby">
+							# File: Rakefile
+							require 'rake/extensiontask'
+							Rake::ExtensionTask.new('hello_world')
+						</code></pre>
+					</section>
+					<section>
+						<h2>Writing c extension III</h2>
+						<pre><code>
+							rake compile
+						</code></pre>
+						<img src="./images/compile.jpg" />
+					</section>
+
 					<section>
 						<h2>Basement Level 2</h2>
 						<p>Cornify</p>
