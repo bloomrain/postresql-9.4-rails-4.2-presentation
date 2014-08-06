@@ -4,7 +4,7 @@ void Init_line_matcher();
 VALUE divisors(VALUE self, VALUE number);
 
 void Init_prime_demo() {
-  VALUE mPrime = rb_define_module("Prime");
+  VALUE mPrime = rb_define_module("PrimeC");
   VALUE mDemo = rb_define_module_under(mPrime, "Demo");
   rb_define_module_function(mDemo, "divisors", divisors, 1);
 }

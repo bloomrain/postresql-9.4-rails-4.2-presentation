@@ -2,7 +2,11 @@
 # for example lib/tasks/capistrano.rake, and they will automatically be available to Rake.
 
 require File.expand_path('../config/application', __FILE__)
-require 'rake/extensiontask'
 
-Rake::ExtensionTask.new('prime_demo')
+require 'rake/extensiontask'
+require 'rake/javaextensiontask'
+
+Rake::ExtensionTask.new('prime_c_demo')
+Rake::JavaExtensionTask.new('prime_java_demo')
+
 Rails.application.load_tasks
