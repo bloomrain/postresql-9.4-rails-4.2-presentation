@@ -43,8 +43,7 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h1>Ruby</h1>
-					<h3>native extensions</h3>
+					<h2>PostgreSql 9.4 + Rails 4.2 = ♥</h1>
 					<p>
 						<small>Created by <a href="http://d9.lt">Povilas Jurčys</a> / <a href="http://twitter.com/PovilasJurcys">@PovilasJurcys</a></small>
 					</p>
@@ -53,216 +52,45 @@
 				<!-- intro -->
 				<section>
 					<section>
-						<h3>Ruby is dynamic.</h3>
-						<h3 class="fragment">Ruby is beautiful.</h3>
-						<h3 class="fragment">Ruby is easy to understand.</h3>
-						<h2 class="fragment">but... </h2>
+						<h2>Why PostgreSql?</h2>
+						<h3 class="fragment">(Sometimes) faster.</h3>
+						<h3 class="fragment">Complex data types</h3>
+						http://simononsoftware.com/great-presentation-postgresql-and-rails/
 					</section>
 
 					<section>
-						<h2>Stop dreaming the fantasy!</h2>
-						<img src="./images/rainbows_and_unicorns.jpg"  />
+						<h1>What's new in Rails 4.2</h1>
+						<h4>(DB related)</h4>
+
+						<h2>Foreign Key Support (PostgeSql, MySql)</h2>
+						<h2>JSONB format (PostgeSql)</h2>
+						<h2>Citext format (PostgeSql)</h2>
+
+						<h3 class="fragment">(Sometimes) faster.</h3>
+						<h3 class="fragment">Complex data types</h3>
 					</section>
 
 					<section>
-						<h2>Face the reality!</h2>
-						<img src="./images/cruel_world.jpg"  />
+						<h2>Foreign key constraints</h2>
+						<h3 class="fragment">https://robots.thoughtbot.com/referential-integrity-with-foreign-keys</h3>
 					</section>
 
 					<section>
-						<h2>Ruby is fast...</h2>
-						<div class="fragment">
-							<h4>as grandpa</span></h4>
-							<img src="./images/grandpa_run.jpg" />
-						</div>
+						<h2>Hstore</h2>
+						<h3 class="fragment">https://robots.thoughtbot.com/referential-integrity-with-foreign-keys</h3>
+						<h3>http://adamsanderson.github.io/railsconf_2013/?full#49</h3>
+						<h4>Hstore stores all values as text :(</h4>
 					</section>
-
-					<section>
-						<h2>Ruby uses memory no more than it needs..</h2>
-						<div class="fragment">
-							<h4>as hungry hamster</h4>
-							<img src="./images/hamster.jpg" />
-						</div>
-					</section>
-
-					<section>
-						<h4>Don't get me wrong</h4>
-						<h3 class="fragment">Ruby is great</h3>
-						<div class="fragment">
-							<h2>Just use proper tools for proper tasks</h2>
-							<img src="./images/wrong_tool.jpg" />
-						</div>
-					</section>
-
-
 				</section>
 
 				<!-- Example of nested vertical slides -->
 				<section>
 					<section>
-						<h2>Ruby native extensions</h2>
-						<ul>
-							<li class="fragment">C</li>
-							<li class="fragment">C++</li>
-							<li class="fragment">D</li>
-							<li class="fragment">Java...</li>
-						</ul>
-					</section>
-
-					<section>
-						<h2>Writing c extension: setup</h2>
-						<br>
-						<ul>
-							<ol>gem install rake-compiler<br>&nbsp;</ol>
-							<ol>
-								structure you code:<br>
-								<span style="color: gray">
-									|-- ext<br>
-									| &nbsp; &nbsp; `-- hello_world<br>
-									| &nbsp; &nbsp; &nbsp; |-- extconf.rb<br>
-									| &nbsp; &nbsp; &nbsp; `-- hello_world.c<br>
-									|-- lib<br>
-									`-- Rakefile<br>
-								</span>
-							</ol>
-						</ul>
-					</section>
-
-					<section>
-						<h2>Writing c extension: declare extension</h2>
-						<pre><code class="ruby">
-							# ext/extconf.rb
-							require 'mkmf'
-
-							extension_name = 'hello_world'
-							dir_config(extension_name)
-							create_makefile(extension_name)
-						</code></pre>
-
-						<pre><code class="ruby">
-							# File: Rakefile
-							require 'rake/extensiontask'
-							Rake::ExtensionTask.new('hello_world')
-						</code></pre>
-					</section>
-
-					<section>
-						<h2>Writing c extension: compiling</h2>
-						<pre><code>
-							rake compile
-						</code></pre>
-						<img src="./images/compile.jpg" />
-					</section>
-
-					<section>
-						<h2>How it looks in ruby</h2>
-						<pre><code class="ruby">
-							class MyTest
-							  def initialize
-							    @arr = Array.new
-							  end
-
-							  def add(obj)
-							    @arr.push(obj)
-							  end
-							end
-						</code></pre>
-					</section>
-
-					<section>
-						<h2>How it looks in c</h2>
-						<pre><code class="c">
-							#include "ruby.h"
-
-							static ID id_push;
-
-							static VALUE t_init(VALUE self)
-							{
-							  VALUE arr;
-
-							  arr = rb_ary_new();
-							  rb_iv_set(self, "@arr", arr);
-							  return self;
-							}
-
-							static VALUE t_add(VALUE self, VALUE obj)
-							{
-							  VALUE arr;
-
-							  arr = rb_iv_get(self, "@arr");
-							  rb_funcall(arr, id_push, 1, obj);
-							  return arr;
-							}
-
-							VALUE cTest;
-
-							void Init_my_test() {
-							  cTest = rb_define_class("MyTest", rb_cObject);
-							  rb_define_method(cTest, "initialize", t_init, 0);
-							  rb_define_method(cTest, "add", t_add, 1);
-							  id_push = rb_intern("push");
-							}
-						</code></pre>
+						<h1>Questions?</h1>
 					</section>
 					<section>
-						<h2>...</h2>
-						<img src="./images/whats_happening.jpg">
+						<h1>Thanks!</h1>
 					</section>
-				</section>
-				<section>
-					<section>
-						<h2>Step by step: init function</h2>
-						<ul>
-							<li class="fragment">
-								Every extension defines a C global function named <i>Init_<b>name</b></i>.
-								<pre><code class="c"> void Init_my_test();</code></pre>
-								This function will be called when the interpreter first loads the extension <i><b>name</b></i>
-								<br />&nbsp;
-
-							</li>
-
-							<li class="fragment">
-								We define what will be loaded to ruby environment there
-								<pre><code class="c">
-									cTest = rb_define_class("MyTest", rb_cObject);
-									rb_define_method(cTest, "initialize", t_init, 0);
-									rb_define_method(cTest, "add", t_add, 1);
-								</code></pre>
-							</li>
-						</ul>
-					</section>
-
-					<section>
-						<h2>Step by step: ruby method declaration</h2>
-						<pre><code class="c">rb_define_method(cTest, "add", t_add, 0);</code></pre>
-
-						<ul>
-							<li class="fragment">class</li>
-							<li class="fragment">method name</li>
-							<li class="fragment">c function that responds to method name</li>
-							<li class="fragment">arguments number</li>
-						</ul>
-					</section>
-
-					<section>
-						<h2>Step by step: ruby method implementation</h2>
-						<pre><code class="c">VALUE t_add(VALUE self, VALUE obj)</code></pre>
-
-						<ul>
-							<li class="fragment">Every ruby atrubute has type of VALUE</li>
-							<li class="fragment">function must return result of type VALUE</li>
-							<li class="fragment">First function argument always points to "ruby self"</li>
-						</ul>
-					</section>
-
-					<section>
-						<h2>Enough of theory. Coding time!</h2>
-						<img src="./images/theory.jpg" />
-					</section>
-				</section>
-
-				<section>
-					<h1>THE END</h1>
 				</section>
 
 			</div>
