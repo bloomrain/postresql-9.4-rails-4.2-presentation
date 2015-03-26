@@ -16,6 +16,7 @@
 
 		<link rel="stylesheet" href="css/reveal.min.css">
 		<link rel="stylesheet" href="css/theme/beige.css" id="theme">
+		<link rel="stylesheet" href="css/custom.css">
 
 		<!-- For syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -43,7 +44,14 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h2>PostgreSql 9.4 + Rails 4.2 = ♥</h1>
+
+					<h2>
+						<span><img class='header' src="./images/postgresql-logo.png" style="height: 200px;" /></span>
+						<span>+ </span>
+						<span><img class='header' src="./images/rails-logo.png" style="height: 200px;" /></span>
+						<span class="fragment">= <img class='header' src="./images/heart.png" style="height: 150px;"/></span>
+					</h2>
+					<br />
 					<p>
 						<small>Created by <a href="http://d9.lt">Povilas Jurčys</a> / <a href="http://twitter.com/PovilasJurcys">@PovilasJurcys</a></small>
 					</p>
@@ -51,23 +59,43 @@
 
 				<!-- intro -->
 				<section>
+
 					<section>
-						<h2>Why PostgreSql?</h2>
-						<h3 class="fragment">(Sometimes) faster.</h3>
-						<h3 class="fragment">Complex data types</h3>
+						<h2>PostgreSql</h2>
+						<img src="./images/postgres-mysql-trend.png" />
+						<aside class="notes">
+							Postresql already becomes rails developer top choise. Let's talk why
+						</aside>
+					</section>
+
+					<section>
+						<h1>PostgreSql</h2>
+						<ul>
+							<li class="fragment">
+								Complex data types
+								<ul>
+									<li>Array</li>
+									<li>JSON, JSONB</li>
+									<li>XML, date ranges, custom types...</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Foreign key constraints
+							</li>
+							<li class="fragment">
+								Full text search support
+							</li>
+						<ul>
+
 						http://simononsoftware.com/great-presentation-postgresql-and-rails/
 					</section>
 
 					<section>
-						<h1>What's new in Rails 4.2</h1>
-						<h4>(DB related)</h4>
+						<h1>Rails 4.2 and Postgres 9.4</h1>
 
-						<h2>Foreign Key Support (PostgeSql, MySql)</h2>
-						<h2>JSONB format (PostgeSql)</h2>
-						<h2>Citext format (PostgeSql)</h2>
-
-						<h3 class="fragment">(Sometimes) faster.</h3>
-						<h3 class="fragment">Complex data types</h3>
+						<h2 class="fragment">Foreign Key Support (PostgeSql, MySql)</h2>
+						<h2 class="fragment">JSONB format (PostgeSql)</h2>
+						<h2 class="fragment">Citext format (PostgeSql)</h2>
 					</section>
 
 					<section>
@@ -76,7 +104,7 @@
 					</section>
 
 					<section>
-						<h2>Hstore</h2>
+						<h2></h2>
 						<h3 class="fragment">https://robots.thoughtbot.com/referential-integrity-with-foreign-keys</h3>
 						<h3>http://adamsanderson.github.io/railsconf_2013/?full#49</h3>
 						<h4>Hstore stores all values as text :(</h4>
