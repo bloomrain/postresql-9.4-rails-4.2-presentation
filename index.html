@@ -51,6 +51,7 @@
 						<span><img class='header' src="./images/rails-logo.png" style="height: 200px;" /></span>
 						<span class="fragment">= <img class='header' src="./images/heart.png" style="height: 150px;"/></span>
 					</h2>
+					http://facts.randomhistory.com/2009/08/04_love.html
 					<br />
 					<p>
 						<small>Created by <a href="http://d9.lt">Povilas Jurčys</a> / <a href="http://twitter.com/PovilasJurcys">@PovilasJurcys</a></small>
@@ -68,8 +69,101 @@
 						</aside>
 					</section>
 
+					<section data-background="./images/romeo-and-juliet2.jpg">
+						<h2>Remoe and Juliet effect</h2>
+
+						Sometimes called the “Romeo and Juliet effect,” a situation with challenges
+						or obstructions is likely to intensify one’s passion for a loved one
+						<aside class="notes">
+							Postresql already becomes rails developer top choise. Let's talk why
+						</aside>
+					</section>
+
+					<section>
+						<h2>What is good about Postgresql</h2>
+						<ul>
+							<li>Datatypes</li>
+							<li>Foreign key support</li>
+							<li>Full text search</li>
+						</ul>
+						<aside class="notes">
+							Postresql already becomes rails developer top choise. Let's talk why
+						</aside>
+					</section>
+
+					<section data-background="./images/eye-contact.jpg">
+						<h2>Remoe and Juliet effect</h2>
+
+						A study conducted in 1989 assures that simple eye contact could make
+						a person fall in love with you (Kellerman, Lewis, and Laird).
+						The Power of Eye Contact - Make Someone Fall in Love With You!
+						In this study two opposite sex strangers were asked to gaze into each other’s eyes
+						for two minutes, which in some cases, was enough to produce passionate feelings for each other
+						<aside class="notes">
+							Postresql already becomes rails developer top choise. Let's talk why
+						</aside>
+					</section>
+
+					<section>
+						<h2>Datatype: citext</h2>
+						<pre><code style="word-wrap: break-word;">
+								enable_extension 'citext'
+
+								create_table :users do |t|
+								  t.citext :username, null: false
+								end
+
+								add_index :users, :username, unique: true
+						</code></pre>
+						<pre><code style="word-wrap: break-word;">
+							User.create(username: 'BloomRain') # ok
+							User.create(username: 'bloomrain') # fail
+							User.find_by(username: 'BlooMrAiN')
+						</code></pre>
+					</section>
+
+					<section>
+						<h2>Datatype: Array</h2>
+						<pre><code style="word-wrap: break-word;">
+							create_table :books do |t|
+							  t.string 'title'
+							  t.string 'tags', array: true
+							  t.integer 'ratings', array: true
+							end
+							add_index :books, :tags, using: 'gin'
+							add_index :books, :ratings, using: 'gin'
+						</code></pre>
+
+						<pre class="fragment"><code style="word-wrap: break-word;">
+	Book.create(tags: ['fantasy', 'fiction], ratings: [4, 5])
+	Book.where("'fantasy' = ANY (tags)")
+	Book.where("tags @> ARRAY[?]::varchar[]", ["fantasy", "fiction"])
+	Book.where("array_length(ratings, 1) >= 3")
+						</code></pre>
+					</section>
+
+					<section>
+						<h2>Datatype: JSON(B)</h2>
+						<pre><code style="word-wrap: break-word;">
+							create_table :product do |t|
+								t.sort :string
+							  t.jsonb 'details', array: true
+							end
+							add_index :books, :info, using: 'gin'
+						</code></pre>
+						<pre class="fragment"><code style="word-wrap: break-word;">
+							Product.create(sort: 'Book', details: {'ISBN': '047X', lang: 'en'})
+							# has key?
+							Product.where('details ? "ISBN"')
+							# has key/val pair?
+							Product.where('details @> {"ISBN": "047X" }')
+						</code></pre>
+					</section>
+
+
 					<section>
 						<h1>PostgreSql</h2>
+						http://edgeguides.rubyonrails.org/active_record_postgresql.html
 						<ul>
 							<li class="fragment">
 								Complex data types
